@@ -1,0 +1,28 @@
+{
+  "name": "@flagship.io/js-sdk-logs",
+  "version": "0.0.1",
+  "description": "Log engine for all Flagship SDK running with javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Flagship",
+    "Ab",
+    "tasty",
+    "ab",
+    "tasty"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.8.0",
+    "@typescript-eslint/parser": "^2.8.0",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-import": "^2.18.2",
+    "prettier": "2.0.4",
+    "typescript": "^3.8.3"
+  }
+}
