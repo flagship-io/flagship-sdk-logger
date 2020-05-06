@@ -4,7 +4,8 @@
     "description": "Log engine for all Flagship SDK running with javascript",
     "main": "index.tsx",
     "scripts": {
-        "test": "jest --verbose"
+        "test": "jest --verbose",
+        "build": "rm -rf dist && tsc"
     },
     "keywords": [
         "Flagship",
