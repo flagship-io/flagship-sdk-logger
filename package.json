@@ -5,8 +5,14 @@
     "main": "index.tsx",
     "scripts": {
         "test": "jest --verbose",
-        "build": "rm -rf dist && tsc"
+        "build": "rm -rf dist && tsc",
+        "release": "np"
     },
+    "files": [
+        "dist",
+        "README.md",
+        "package.json"
+    ],
     "keywords": [
         "Flagship",
         "Ab",
@@ -14,8 +20,15 @@
         "ab",
         "tasty"
     ],
-    "author": "",
     "license": "ISC",
+    "types": "dist/index.d.ts",
+    "contributors": [
+        {
+            "name": "Emilien Domenge-Heritier",
+            "email": "emilien.domenge-heritier@abtasty.com",
+            "url": "https://domenge.fr"
+        }
+    ],
     "devDependencies": {
         "@types/jest": "^24.0.22",
         "@typescript-eslint/eslint-plugin": "^2.8.0",
@@ -26,6 +39,7 @@
         "eslint-loader": "^3.0.3",
         "eslint-plugin-import": "^2.18.2",
         "jest": "^25.5.4",
+        "np": "^6.2.3",
         "prettier": "2.0.4",
         "prettier-eslint": "^9.0.1",
         "ts-jest": "^25.5.0",
