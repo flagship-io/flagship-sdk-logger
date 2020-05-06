@@ -89,7 +89,8 @@ describe('FlagshipLogger', () => {
     expect(spyWarnLogs).toHaveBeenCalledTimes(0);
     expect(spyInfoLogs).toHaveBeenCalledTimes(0);
   });
-  it('should debug log', () => {
+  it('should debug log when nodeEnv is set but not equal to "production"', () => {
+    config = { ...config, nodeEnv: 'development' };
     const fsLogger = FlagshipLogger.getLogger(config);
     const spy = jest.spyOn(fsLogger, 'debug');
     const param = 'This is a debug log';
@@ -106,5 +107,41 @@ describe('FlagshipLogger', () => {
     expect(value).toEqual(param);
     expect(spyWarnLogs).toHaveBeenCalledTimes(0);
     expect(spyErrorLogs).toHaveBeenCalledTimes(0);
+  });
+  it('should NOT debug log when nodeEnv="production"', () => {
+    config = { ...config, nodeEnv: 'production' };
+    const fsLogger = FlagshipLogger.getLogger(config);
+    const spy = jest.spyOn(fsLogger, 'debug');
+    const param = 'This is a debug log';
+    fsLogger.debug(param);
+    expect(spy).toHaveBeenNthCalledWith(1, param);
+    expect(spyWarnLogs).toHaveBeenCalledTimes(0);
+    expect(spyInfoLogs).toHaveBeenCalledTimes(0);
+    expect(spyErrorLogs).toHaveBeenCalledTimes(0);
+  });
+  it('should NOT debug log when nodeEnv is not set', () => {
+    const fsLogger = FlagshipLogger.getLogger(config);
+    const spy = jest.spyOn(fsLogger, 'debug');
+    const param = 'This is a debug log';
+    fsLogger.debug(param);
+    expect(spy).toHaveBeenNthCalledWith(1, param);
+    expect(spyWarnLogs).toHaveBeenCalledTimes(0);
+    expect(spyInfoLogs).toHaveBeenCalledTimes(0);
+    expect(spyErrorLogs).toHaveBeenCalledTimes(0);
+  });
+  it('should display correct name if set', () => {
+    const fsLogger = FlagshipLogger.getLogger(config, 'Toto SDK');
+    const spy = jest.spyOn(fsLogger, 'info');
+    fsLogger.info('This is a info log');
+    expect(spy).toHaveBeenNthCalledWith(1, 'This is a info log');
+    const splitElement = spyInfoLogs.mock.calls[0][0].split(' - ');
+    const time = splitElement[0].replace(new RegExp('[0-9]', 'g'), 'x');
+    const name = splitElement[1];
+    const value = splitElement[2];
+    expect(time).toEqual('[xx:xx:xx]');
+    expect(name).toEqual('Toto SDK');
+    expect(value).toEqual('This is a info log');
+    expect(spyErrorLogs).toHaveBeenCalledTimes(0);
+    expect(spyWarnLogs).toHaveBeenCalledTimes(0);
   });
 });

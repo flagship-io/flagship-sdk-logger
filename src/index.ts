@@ -28,7 +28,7 @@ Available logs:
 
 const FlagshipLogger = {
   getLogger: (config: LogConfig, name = 'Flagship SDK'): FsLogger => {
-    const { enableConsoleLogs } = config;
+    const { enableConsoleLogs, nodeEnv } = config;
     const timestamp = `[${new Date().toISOString().slice(11, -5)}] - `;
     return {
       warn: (str: string): void | null => (enableConsoleLogs
@@ -43,7 +43,9 @@ const FlagshipLogger = {
       fatal: (str: string): void | null => (enableConsoleLogs
         ? console.error(`${timestamp}${name} - Fatal: ${str}`)
         : null),
-      debug: (str: string): void | null => (config.nodeEnv !== 'production' && enableConsoleLogs
+      debug: (str: string): void | null => (nodeEnv
+                && nodeEnv !== 'production'
+                && enableConsoleLogs
         ? console.log(`${timestamp}${name} - Debug: ${str}`)
         : null),
     };
