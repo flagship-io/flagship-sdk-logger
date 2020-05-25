@@ -8,7 +8,6 @@ export declare type FsLogger = {
 export declare type LogConfig = {
     fetchNow?: boolean;
     activateNow?: boolean;
-    logPathName?: string;
     enableConsoleLogs?: boolean;
     nodeEnv?: string;
     flagshipApi?: string;

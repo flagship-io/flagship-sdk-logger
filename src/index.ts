@@ -11,7 +11,6 @@ export type FsLogger = {
 export type LogConfig = {
     fetchNow?: boolean;
     activateNow?: boolean;
-    logPathName?: string;
     enableConsoleLogs?: boolean;
     nodeEnv?: string;
     flagshipApi?: string;
