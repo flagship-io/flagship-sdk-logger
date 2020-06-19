@@ -28,24 +28,24 @@ Available logs:
 const FlagshipLogger = {
   getLogger: (config: LogConfig, name = 'Flagship SDK'): FsLogger => {
     const { enableConsoleLogs, nodeEnv } = config;
-    const timestamp = `[${new Date().toISOString().slice(11, -5)}] - `;
+    const timestamp = `[${new Date().toISOString().slice(11, -5)}]`;
     return {
       warn: (str: string): void | null => (enableConsoleLogs
-        ? console.warn(`${timestamp}${name} - ${str}`)
+        ? console.warn(`${timestamp} - ${name} - ${str}`)
         : null),
       error: (str: string): void | null => (enableConsoleLogs
-        ? console.error(`${timestamp}${name} - ${str}`)
+        ? console.error(`${timestamp} - ${name} - ${str}`)
         : null),
       info: (str: string): void | null => (enableConsoleLogs
-        ? console.log(`${timestamp}${name} - ${str}`)
+        ? console.log(`${timestamp} - ${name} - ${str}`)
         : null),
       fatal: (str: string): void | null => (enableConsoleLogs
-        ? console.error(`${timestamp}${name} - Fatal: ${str}`)
+        ? console.error(`${timestamp} - FATAL - ${name} - ${str}`)
         : null),
       debug: (str: string): void | null => (nodeEnv
                 && nodeEnv !== 'production'
                 && enableConsoleLogs
-        ? console.log(`${timestamp}${name} - Debug: ${str}`)
+        ? console.log(`${timestamp} - DEBUG - ${name} - ${str}`)
         : null),
     };
   },
