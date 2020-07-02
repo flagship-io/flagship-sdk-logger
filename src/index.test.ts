@@ -22,6 +22,33 @@ describe('FlagshipLogger', () => {
         spyInfoLogs.mockRestore();
     });
 
+    it('should have not frozen timestamp', (done) => {
+        const fsLogger = FlagshipLogger.getLogger(config);
+        const spy = jest.spyOn(fsLogger, 'info');
+        fsLogger.info('This is a info log');
+        expect(spy).toHaveBeenNthCalledWith(1, 'This is a info log');
+        let splitElement = spyInfoLogs.mock.calls[0][0].split(' - ');
+        const timePast = splitElement[0];
+        const name = splitElement[1];
+        const value = splitElement[2];
+        expect(name).toEqual('Flagship SDK');
+        expect(value).toEqual('This is a info log');
+        expect(spyErrorLogs).toHaveBeenCalledTimes(0);
+        expect(spyWarnLogs).toHaveBeenCalledTimes(0);
+
+        setTimeout(() => {
+            try {
+                fsLogger.info('Here me again !');
+                splitElement = spyInfoLogs.mock.calls[1][0].split(' - ');
+                const timePresent = splitElement[0];
+                expect(timePresent).not.toEqual(timePast);
+                done();
+            } catch (error) {
+                done.fail(error);
+            }
+        }, 2000);
+    });
+
     it('should info log', () => {
         const fsLogger = FlagshipLogger.getLogger(config);
         const spy = jest.spyOn(fsLogger, 'info');
