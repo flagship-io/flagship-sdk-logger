@@ -3,6 +3,7 @@
     "version": "0.1.1",
     "description": "Log engine for all Flagship SDK running with javascript",
     "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "scripts": {
         "test": "jest --verbose",
         "build": "rm -rf dist && tsc",
@@ -21,7 +22,6 @@
         "tasty"
     ],
     "license": "ISC",
-    "types": "dist/index.d.ts",
     "contributors": [
         {
             "name": "Emilien Domenge-Heritier",
