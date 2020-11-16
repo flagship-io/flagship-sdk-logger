@@ -7,6 +7,7 @@
     "scripts": {
         "test": "jest --verbose",
         "build": "rm -rf dist && tsc",
+        "version": "npm run build",
         "release": "np"
     },
     "files": [
