@@ -1,6 +1,6 @@
 {
     "name": "@flagship.io/js-sdk-logs",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "description": "Log engine for all Flagship SDK running with javascript",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
