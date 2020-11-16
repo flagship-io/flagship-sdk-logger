@@ -43,4 +43,15 @@ const FlagshipLogger = {
     }
 };
 
+export const FlagshipCommon = {
+    createVisitorId: (): string => {
+        const now = new Date();
+        const random = Math.floor(Math.random() * (99999 - 10000) + 10000); // Random number between 10000 - 99999
+        const twoDigits = (val: any): any => (val.toString().length === 1 ? `0${val}` : val);
+        return `${now.getFullYear()}${twoDigits(now.getMonth() + 1)}${twoDigits(now.getDate())}${twoDigits(now.getHours())}${twoDigits(
+            now.getMinutes()
+        )}${random}`;
+    }
+};
+
 export default FlagshipLogger;

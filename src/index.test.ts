@@ -1,4 +1,4 @@
-import FlagshipLogger, { LogConfig } from './index';
+import FlagshipLogger, { LogConfig, FlagshipCommon } from './index';
 
 describe('FlagshipLogger', () => {
     const defaultConfig: LogConfig = {
@@ -170,5 +170,27 @@ describe('FlagshipLogger', () => {
         expect(value).toEqual('This is a info log');
         expect(spyErrorLogs).toHaveBeenCalledTimes(0);
         expect(spyWarnLogs).toHaveBeenCalledTimes(0);
+    });
+});
+
+describe('FlagshipCommon', () => {
+    beforeEach(() => {
+        //
+    });
+
+    afterEach(() => {
+        //
+    });
+
+    it('should generate correct template when creating a new visitor id', () => {
+        const id = FlagshipCommon.createVisitorId();
+        const now = new Date();
+
+        const slicedId = id;
+        expect(parseInt(slicedId.slice(0, 4), 10)).toEqual(now.getFullYear());
+        expect(parseInt(slicedId.slice(4, 6), 10)).toEqual(now.getMonth() + 1);
+        expect(parseInt(slicedId.slice(6, 8), 10)).toEqual(now.getDate());
+        expect(parseInt(slicedId.slice(8, 10), 10)).toEqual(now.getHours());
+        expect(parseInt(slicedId.slice(10, 12), 10)).toEqual(now.getMinutes());
     });
 });
